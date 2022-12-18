@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>java-spring-vue</artifactId>
+        <groupId>com.willsmelser</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>vue-js</artifactId>
+
+    <properties>
+        <docker.tag.name>example-vuejs-proj</docker.tag.name>
+
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>exec-maven-plugin</artifactId>
+                <groupId>org.codehaus.mojo</groupId>
+                <executions>
+                    <!-- build -->
+                    <execution>
+                        <id>Build Vue Code</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>
+                                <argument>${docker.tag.name}</argument>
+                            </arguments>
+                            <executable>${basedir}/src/main/build.sh</executable>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
